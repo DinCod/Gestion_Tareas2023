@@ -2,7 +2,6 @@ package com.example.gestiontarea2023.Model;
 
 import java.io.Serializable;
 import java.util.List;
-
 public class Tablero implements Serializable {
 
     private int id_tablero;

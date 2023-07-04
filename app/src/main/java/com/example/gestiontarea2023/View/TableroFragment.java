@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.gestiontarea2023.Model.Tablero;
 import com.example.gestiontarea2023.Model.Usuario;
@@ -22,6 +23,8 @@ import com.example.gestiontarea2023.R;
 import com.example.gestiontarea2023.Utilidades.ListAdapterTablero;
 import com.example.gestiontarea2023.ViewModel.TableroViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class TableroFragment extends Fragment implements View.OnClickListener {
@@ -33,7 +36,7 @@ public class TableroFragment extends Fragment implements View.OnClickListener {
     private Tablero tablero;
     private AlertDialog dialog;
     private ListAdapterTablero adapter;
-
+    private TextView txt_resultado;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,7 @@ public class TableroFragment extends Fragment implements View.OnClickListener {
         getActivity().setTitle("Mi Tablero");
         btn_agregar_tablero = (FloatingActionButton) view.findViewById(R.id.btn_agregar_tablero);
         btn_agregar_tablero.setOnClickListener(this);
+        txt_resultado = view.findViewById(R.id.resultado);
         tableroViewModel = new TableroViewModel(context);
         tableroViewModel.ReturnUsuario(usuario);
         tableroViewModel.getRegistro().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
@@ -68,7 +72,9 @@ public class TableroFragment extends Fragment implements View.OnClickListener {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
                 recyclerView.setAdapter(adapter);
                 adapter.setItems(tableros);
-                adapter.notifyDataSetChanged();
+                if(adapter.getItemCount()>=1) {
+                    txt_resultado.setVisibility(View.INVISIBLE);
+                }
             }
         });
         return view;
@@ -85,6 +91,13 @@ public class TableroFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         tableroViewModel.Lista();
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        tableroViewModel.Lista();
+    }
+
     public void message(String message){
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }

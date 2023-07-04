@@ -20,7 +20,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:text="No hay información."
-        android:visibility="invisible"
         android:textSize="17dp"
         android:textStyle="bold"
         android:textAlignment="center"/>

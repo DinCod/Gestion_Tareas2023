@@ -20,29 +20,41 @@ public class MenuActivity extends AppCompatActivity {
     private PerfilFragment tercero = new PerfilFragment();
     private Bundle bundle;
 
+    private Fragment currentFragment; // Variable para almacenar el fragmento actual
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(itemSelected);
-        if(getIntent()!=null){
+        if (savedInstanceState != null) {
+            currentFragment = getSupportFragmentManager().getPrimaryNavigationFragment();
+        } else {
+            currentFragment = primero;
+        }
+        if (getIntent() != null) {
             bundle = new Bundle();
             bundle.putSerializable("usuario", (Serializable) getIntent().getSerializableExtra("usuario"));
             primero.setArguments(bundle);
             segundo.setArguments(bundle);
             tercero.setArguments(bundle);
         }
-        loadFragment(primero);
     }
 
-    public void message(String message){
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadFragment(currentFragment);
+    }
+
+    public void message(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_option,menu);
+        getMenuInflater().inflate(R.menu.menu_option, menu);
         return true;
     }
 
@@ -62,32 +74,26 @@ public class MenuActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             int itemId = item.getItemId();
             if (itemId == R.id.primer_fragment) {
-                loadFragment(primero);
+                currentFragment = primero;
+                loadFragment(currentFragment);
                 return true;
             } else if (itemId == R.id.segundo_fragment) {
-                loadFragment(segundo);
+                currentFragment = segundo;
+                loadFragment(currentFragment);
                 return true;
             } else if (itemId == R.id.tercero_fragment) {
-                loadFragment(tercero);
+                currentFragment = tercero;
+                loadFragment(currentFragment);
                 return true;
             }
             return false;
         }
     };
 
-    public void loadFragment(Fragment fragment){
+    public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container,fragment);
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.setPrimaryNavigationFragment(fragment);
         transaction.commit();
-        fragment.setArguments(bundle);
     }
 }
-
-
-/*
-*
-*
-* usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-            bundle  = new Bundle();
-            bundle.putSerializable("usuario", usuario);
-* */

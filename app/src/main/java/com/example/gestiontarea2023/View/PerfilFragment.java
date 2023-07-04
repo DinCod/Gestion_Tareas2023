@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.gestiontarea2023.Model.Usuario;
 import com.example.gestiontarea2023.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class PerfilFragment extends Fragment {
 
     private Usuario usuario;
     private Context context;
 
+    private TextInputLayout txtNombre,txtDni,txtEmail,txtPassword,txtNumeroTelefono;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +38,23 @@ public class PerfilFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        message(usuario.getCorreo());
+        View view = inflater.inflate(R.layout.fragment_tercero, container, false);
         getActivity().setTitle("Mi Perfil");
-        return inflater.inflate(R.layout.fragment_tercero, container, false);
+        txtNombre         = view.findViewById(R.id.textInputName2);
+        txtDni            = view.findViewById(R.id.textInputDni2);
+        txtNumeroTelefono = view.findViewById(R.id.textInputMobile2);
+        txtEmail          = view.findViewById(R.id.textInputEmail2);
+        txtPassword       = view.findViewById(R.id.textInputPassword2);
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        txtNombre.getEditText().setText(usuario.getNombre()+" "+usuario.getApellido_paterno()+" "+usuario.getApellido_materno());
+        txtDni.getEditText().setText(usuario.getDni());
+        txtEmail.getEditText().setText(usuario.getCorreo());
+        txtPassword.getEditText().setText(usuario.getClave());
+        txtNumeroTelefono.getEditText().setText(usuario.getTelefono());
     }
 }

@@ -1,14 +1,13 @@
 package com.example.gestiontarea2023.Utilidades;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-
 public class DialogConfirm {
     public interface ConfirmDialogListener {
         void onConfirm();
         void onCancel();
     }
-
     public static void showConfirmDialog(Context context, String title, String message, ConfirmDialogListener listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title)

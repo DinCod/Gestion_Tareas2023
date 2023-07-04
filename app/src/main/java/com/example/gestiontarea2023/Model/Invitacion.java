@@ -1,7 +1,6 @@
 package com.example.gestiontarea2023.Model;
 
 import java.io.Serializable;
-
 public class Invitacion implements Serializable{
 
     private int id_invitaciones;
@@ -17,7 +16,25 @@ public class Invitacion implements Serializable{
     private String fechaactualiza;
     private int id_usuarioregistro;
     private int id_usuarioactualiza;
+    //datos agregados
+    private String usuario_invita;
+    private String tablero_invitado;
 
+    public String getUsuario_invita() {
+        return usuario_invita;
+    }
+
+    public void setUsuario_invita(String usuario_invita) {
+        this.usuario_invita = usuario_invita;
+    }
+
+    public String getTablero_invitado() {
+        return tablero_invitado;
+    }
+
+    public void setTablero_invitado(String tablero_invitado) {
+        this.tablero_invitado = tablero_invitado;
+    }
 
     public Invitacion(int id_usuario_emisor, int id_usuario_receptor, int id_tablero, String tipo_invitacion) {
         this.id_usuario_emisor = id_usuario_emisor;

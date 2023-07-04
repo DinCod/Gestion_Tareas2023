@@ -8,66 +8,62 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.gestiontarea2023.Model.Usuario;
+import com.example.gestiontarea2023.Model.Invitacion;
 import com.example.gestiontarea2023.R;
-import com.example.gestiontarea2023.View.ModalUsuarioDialog;
-
 import java.util.List;
 
-public class ListAdapterUsuario extends RecyclerView.Adapter<ListAdapterUsuario.ViewHolder> {
-
+public class ListAdapterInvitacion extends RecyclerView.Adapter<ListAdapterInvitacion.ViewHolder>{
     private LayoutInflater layoutInflater;
-    private List<Usuario> listaUsuarios;
+    private List<Invitacion> listInvitacion;
     private Context context;
     private Activity activity;
-    private ModalUsuarioDialog modalUsuarioDialog;
-    public ListAdapterUsuario(List<Usuario> itemList, Context context, ModalUsuarioDialog modalUsuarioDialog) {
+
+    public ListAdapterInvitacion(List<Invitacion> itemList, Context context) {
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
-        this.listaUsuarios = itemList;
+        this.listInvitacion = itemList;
         this.activity = (Activity) context;
-        this.modalUsuarioDialog = modalUsuarioDialog;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.list_usuario, parent, false);
+        View view = layoutInflater.inflate(R.layout.list_invitacion, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Usuario usuario = listaUsuarios.get(position);
-        holder.txtNombre.setText(usuario.getNombre()+" "+usuario.getApellido_paterno()+" "+usuario.getApellido_materno());
-        holder.txtEmail.setText(usuario.getCorreo());
-        holder.bindData(usuario);
+        Invitacion invitacion = listInvitacion.get(position);
+        holder.txt_usuario_invita.setText("Emisor: "+invitacion.getUsuario_invita());
+        holder.txt_tablero_invitado.setText("Tablero: "+invitacion.getTablero_invitado());
+        holder.bindData(invitacion);
     }
 
     @Override
     public int getItemCount() {
-        return listaUsuarios.size();
+        return listInvitacion.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtNombre, txtEmail;
+        TextView txt_usuario_invita, txt_tablero_invitado;
         ViewHolder(View holder) {
             super(holder);
-            txtNombre = holder.findViewById(R.id.txt_nombre_usuario);
-            txtEmail  = holder.findViewById(R.id.txt_correo_usuario);
+            txt_usuario_invita = holder.findViewById(R.id.txt_usuario_invita);
+            txt_tablero_invitado  = holder.findViewById(R.id.txt_tablero_invitado);
         }
-        void bindData(Usuario usuario){
+        void bindData(Invitacion invitacion){
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    modalUsuarioDialog.CrearModalButtom(usuario);
+
                 }
             });
         }
     }
 
-    public void setItems(List<Usuario> items) {
-        listaUsuarios = items;
+    public void setItems(List<Invitacion> items) {
+        listInvitacion = items;
     }
 
 }

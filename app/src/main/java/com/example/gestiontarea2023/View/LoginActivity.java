@@ -12,14 +12,13 @@ import android.widget.Button;
 import android.widget.Toast;
 import com.example.gestiontarea2023.Model.Usuario;
 import com.example.gestiontarea2023.R;
-import com.example.gestiontarea2023.Utilidades.Progress;
 import com.example.gestiontarea2023.ViewModel.UsuarioViewModel;
 import com.google.android.material.textfield.TextInputLayout;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private TextInputLayout textInputEmail, textInputPassword;
     private Button btnLogin;
     private UsuarioViewModel usuarioViewModel;
-    private Progress progress;
     private Context context;
     private Activity activity;
 
@@ -32,7 +31,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textInputPassword = findViewById(R.id.textInputPassword);
         btnLogin          = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(this);
-        progress          = new Progress(context);
         activity          = (Activity) context;
         usuarioViewModel = new UsuarioViewModel(context);
         usuarioViewModel.getUsuarioLiveData().observe(this, new Observer<Usuario>() {

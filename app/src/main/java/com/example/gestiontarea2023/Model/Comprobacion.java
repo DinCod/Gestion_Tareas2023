@@ -1,8 +1,8 @@
 package com.example.gestiontarea2023.Model;
+
 import java.io.Serializable;
 
 public class Comprobacion implements Serializable {
-
     private int id_comprobacion;
     private int id_tarea;
     private String titulo_comprobacion;

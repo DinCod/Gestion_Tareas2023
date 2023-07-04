@@ -3,13 +3,13 @@
     <item
         android:id="@+id/primer_fragment"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Principal"/>
+        android:title="Menú Principal"/>
     <item
         android:id="@+id/segundo_fragment"
-        android:icon="@drawable/ic_baseline_star_24"
-        android:title="Favorito"/>
+        android:icon="@drawable/baseline_view_compact_alt_24"
+        android:title="Mis invitaciones"/>
     <item
         android:id="@+id/tercero_fragment"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="Perfil"/>
+        android:title="Mi Perfil"/>
 </menu>

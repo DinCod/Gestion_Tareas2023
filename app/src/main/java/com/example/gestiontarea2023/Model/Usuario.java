@@ -1,6 +1,6 @@
 package com.example.gestiontarea2023.Model;
-import java.io.Serializable;
 
+import java.io.Serializable;
 public class Usuario implements Serializable{
     private int id_usuario;
     private String nombre;

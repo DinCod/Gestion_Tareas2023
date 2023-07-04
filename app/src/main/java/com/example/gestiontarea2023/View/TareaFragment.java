@@ -67,8 +67,6 @@ public class TareaFragment extends Fragment implements View.OnClickListener{
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
                 recyclerView.setAdapter(listAdapterTarea);
-                listAdapterTarea.setItems(tareas);
-                listAdapterTarea.notifyDataSetChanged();
                 if(listAdapterTarea.getItemCount()<=0){
                     count_tarea.setVisibility(View.VISIBLE);
                 }
@@ -114,7 +112,7 @@ public class TareaFragment extends Fragment implements View.OnClickListener{
         if(btn_agregar_tarea==event_click){
             LayoutInflater inflater = getLayoutInflater();
             View alertLayout = inflater.inflate(R.layout.modal_agregar_tarea, null);
-            EditText titulo_tarea      = alertLayout.findViewById(R.id.dialog_descripcion_tarea);
+            EditText titulo_tarea      = alertLayout.findViewById(R.id.dialog_titulo_tarea);
             EditText descripcion_tarea = alertLayout.findViewById(R.id.dialog_descripcion_tarea);
             EditText fecha_vencimiento = alertLayout.findViewById(R.id.dialog_fecha_tarea);
             fecha_vencimiento.setOnClickListener(new View.OnClickListener() {

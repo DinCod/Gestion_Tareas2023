@@ -4,16 +4,13 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.widget.DatePicker;
 import android.widget.EditText;
-
 import java.util.Calendar;
 
 public class DialogDatePicker {
     Context context;
-
     public DialogDatePicker(Context context){
          this.context = context;
     }
-
     public void showModalDatePickerDialog(EditText editText){
         final Calendar c = Calendar.getInstance();
         int anio = c.get(Calendar.YEAR);

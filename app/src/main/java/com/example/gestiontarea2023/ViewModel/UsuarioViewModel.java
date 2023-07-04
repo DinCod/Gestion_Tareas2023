@@ -1,7 +1,6 @@
 package com.example.gestiontarea2023.ViewModel;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -18,7 +17,6 @@ import com.example.gestiontarea2023.Model.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,22 +49,23 @@ public class UsuarioViewModel extends ViewModel {
                     public void onResponse(JSONArray response) {
                         Usuario usuario = null;
                         try {
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonObject = response.getJSONObject(i);
+                            if (response.length() > 0) {
+                                JSONObject jsonObject = response.getJSONObject(0);
                                 usuario = new Usuario();
                                 usuario.setId_usuario(jsonObject.getInt("id_usuario"));
                                 usuario.setNombre(jsonObject.getString("nombre"));
                                 usuario.setApellido_materno(jsonObject.getString("apellido_materno"));
                                 usuario.setApellido_paterno(jsonObject.getString("apellido_paterno"));
+                                usuario.setDni(jsonObject.getString("dni"));
+                                usuario.setTelefono(jsonObject.getString("telefono"));
                                 usuario.setCorreo(jsonObject.getString("correo"));
-                                usuarioLiveData.setValue(usuario);
-                            }
-                            if(usuario == null){
-                                usuarioLiveData.setValue(null);
+                                usuario.setClave(jsonObject.getString("clave"));
+                                usuario.setFoto_perfil(jsonObject.getString("foto_perfil"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        usuarioLiveData.setValue(usuario);
                     }
                 },
                 new Response.ErrorListener() {
